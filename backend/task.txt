@@ -1,0 +1,52 @@
+--بكند #abd3lhadi
+
+Tasks = [
+    
+    DataBase Schema, --Done #abd3lhadi
+
+    DataBase Model, --Done #abd3lhadi
+
+    Login(JWT AUTH), --Done #abd3lhadi
+
+    Teachers: --Done #abd3lhadi
+        {
+            Add : By(one, CSV),
+            Update,
+            Delete,
+            Show : By(one, all),
+            edit profile
+        },
+
+    Students: --Done #abd3lhadi
+        {
+            Add : By(one, CSV),
+            Update,
+            Delete,
+            Show : By(one, all),
+            Absence,
+            edit profile
+        },
+
+    Classes:
+        {
+            Add,
+            Update,
+            Delete,
+            Show
+        },
+
+    Events:
+        {
+            post: (text),
+            reactions,
+        },
+
+    Courses:
+        {
+            Add: (image, PDF),
+            comment,
+        },
+
+    Notification system,
+
+]

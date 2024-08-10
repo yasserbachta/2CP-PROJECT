@@ -1,0 +1,88 @@
+simple documentation:
+Class:
+/School/Class : to add , list or classes
+to add give it :
+ niveau= models.CharField(max_length=50, choices=grades)
+    année = models.CharField(max_length=50)
+    num_classe = models.CharField(max_length=50)
+    teacher = models.ManyToManyField('Teacher', related_name='classes') 
+    AcademicYear=models.ForeignKey(AcademicYear , on_delete=models.PROTECT) it should be like a drop box the user select one 
+    of the choices 
+     Modules = models.ManyToManyField(Module) (give me list of ids)
+
+ /School/Class/"class_id" : choose class to  update class or delete it
+ 
+to update give it :
+    niveau= models.CharField(max_length=50, choices=grades)
+    année = models.CharField(max_length=50)
+    num_classe = models.CharField(max_length=50)
+    teacher = models.ManyToManyField('Teacher', related_name='classes') it should be like a drop box the user select one 
+    or more teacher (just id) 
+    AcademicYear=models.ForeignKey(AcademicYear , on_delete=models.PROTECT): it should be like a drop box the user select one 
+    of the choices 
+    Modules = models.ManyToManyField(Module) (give me list of ids)
+ 
+ /School/Class/"class_id"/Modules : to list the Modules in class
+ /School/Class/"class_id"/Modules/"module_id" : get information about this module
+ /School/Class/"class_id"/Modules/"module_id"/Courses : get courses for this module (just get request impossible to add put , post request)
+ use it to show the student his courses 
+ 
+ *********************************************************
+ 
+Teacher:
+/School/Teacher : to add teachers , list or teachers
+to add give it :
+teacher_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, related_name='teacher')
+    
+    nom = models.CharField(max_length=50)
+    prénom = models.CharField(max_length=50)
+    gender = models.CharField(max_length=1, choices=genders)
+    phone_num = models.CharField(max_length=10, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    password = models.CharField(max_length=50, null=True, blank=True)
+    Modules = models.ManyToManyField(Module ) :  it should be like a drop box the user select one  or more
+    choices (send me just ids and the user see the module name)
+    about = models.TextField(default=" ",null=True, blank=True)
+    location = models.CharField(max_length=50, null=True, blank=True)
+ /School/Teacher/"teacher_id" : choose teacher to add , update , delete it
+ /School/Teacher/"teacher_id"/Classes : to list the Classes that the teacher teach
+ /School/Teacher/"teacher_id"/Classes/"class_id" : get information about this class
+ /School/Teacher/"teacher_id"/Classes/"class_id"/Modules : get the modules that the teacher teach in this class (basecly just select the modules fields from the teacher object bcz the teacher can not teach a module in a class and in another class teach another (ex : arabic teacher can teach just arabic what ever class) if you get contre example we will fix it )  
+ /School/Teacher/"teacher_id"/Classes/"class_id"/Modules/"module_id"/Courses : get the courses that the teacher sent to this class to this module (impossible to add put , post request) just redirect him to Courses endpoint
+ 
+ 
+###############################################################
+
+Courses:
+
+/School/Courses : to add , list Courses (teacher need to choose the class and which module (teacher maybe can teach more than module in a class like in "primaire"))
+to add give it :
+    title = models.CharField(max_length=50)
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE) (just id)
+    module = models.ForeignKey('Module', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='courses_files', blank=True)
+    pic = models.ImageField(upload_to='courses_pics', blank=True)
+    
+/School/Courses/"course_id" :  choose course to update , delete it
+to update give me : 
+    title = models.CharField(max_length=50)
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE) (just id)
+    module = models.ForeignKey('Module', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='courses_files', blank=True)
+    pic = models.ImageField(upload_to='courses_pics', blank=True)
+    and his id (pk)
+/School/Courses/"course_id"/Comments :  get comments in this course or add comment
+to add comment give me : 
+    comment = models.TextField() 
+    student = models.ForeignKey('Student', on_delete=models.CASCADE) (student id)
+    created = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey(courses, on_delete=models.CASCADE)
+
+
+ 
+ 

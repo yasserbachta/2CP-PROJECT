@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  background-color: #ffffff;
+  width: 0.3vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4d44b5;
+}
+
+input[type='checkbox'].Stufu {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type='checkbox'].Stufu::before {
+  position: absolute;
+  left: 0;
+  content: url('./assets/checkbox.svg');
+  width: 24px;
+  height: 24px;
+  margin-top: -2px;
+  display: none;
+}
+
+input[type='checkbox'].Stufu:hover {
+  background: #F1F1F1F1;
+}
+
+input[type='checkbox'].Stufu:checked::before {
+  display: block;
+}
+
+.custom-fileUploader {
+  height: 150px;
+  width: 150px;
+}
