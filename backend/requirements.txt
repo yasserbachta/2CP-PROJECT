@@ -4,7 +4,7 @@ cffi==1.16.0
 charset-normalizer==3.3.2
 cryptography==42.0.5
 defusedxml==0.8.0rc2
-Django==5.0.4
+Django==5.0.10
 django-clearcache==1.2.1
 django-cors-headers==4.3.1
 django-debug-toolbar==4.3.0
